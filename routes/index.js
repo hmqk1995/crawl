@@ -1,6 +1,22 @@
-var python_node = require('../controllers/python_node.js');
-
 exports.index = function(req, res) {
-  python_node();
-  res.render('index', {title: '测试'});
+  var _async = require('async');
+  var getCaptcha = require('../controllers/getCaptcha.js');
+  getCaptcha(function(sessionId){
+      res.render('index', {
+      title: '测试',
+      sessionId: sessionId
+    });
+  });
+  // _async.series([
+  //   function(callback){
+  //     return getCaptcha();
+  //   },
+  //   function(callback){
+  //       res.render('index', {
+  //       title: '测试',
+  //       sessionId: callback
+  //     });
+  //     callback(null, 'two');
+  //   }
+  // ]);
 }
