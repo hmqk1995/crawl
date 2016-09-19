@@ -4,6 +4,9 @@ import urllib2
 import requests
 from bs4 import BeautifulSoup
 
+# 图片存放路径存在问题（稍后创建临时图片并保存到数据库）
+IMAGE_FILE_PATH = './public/captcha.jpg'
+
 # 模拟登录
 class Spider:
     def __init__(self):
@@ -15,15 +18,13 @@ class Spider:
             'j_password': 'qiankun957068',
             'button1': '%B5%C7+%C2%BC'
         }
-        # 打开一个会话
-        self.s = requests.Session()
-        self.s.get('http://jw.cuc.edu.cn/academic/index.jsp')
         # print self.s.cookies
     # 处理验证码
     def getCaptcha(self):
         captchaUrl = 'http://jw.cuc.edu.cn/academic/getCaptcha.do'
-        m = self.s.get(captchaUrl)
-        f = open('captcha.jpg', 'wb')
+        m = requests.get(captchaUrl)
+        print m.cookies['JSESSIONID']
+        f = open(IMAGE_FILE_PATH, 'wb')
         f.write(m.content)
         f.close()
     # 模拟登录
@@ -38,6 +39,5 @@ class Spider:
         soup = BeautifulSoup(openHtml.text, 'html.parser')
         print soup.get_text()
 
-if __name__ == "__main__":
-    spider = Spider()
-    spider.login()
+spider = Spider()
+spider.getCaptcha()
