@@ -29,7 +29,9 @@ module.exports.index2 = function(req, res) {
   var crawl = require('../controllers/crawl.js');
   var data = JSON.stringify(req.body);
 
-  crawl(data, function(data){
+  // 要爬取的url
+  var url = 'http://jw.cuc.edu.cn/academic/student/studentinfo/studentInfoModifyIndex.do?frombase=0&wantTag=0&groupId=&moduleId=2060';
+  crawl(data, url, function(data){
     // 解析html字符串
     var parse = require('../controllers/parsehtml.js');
     var data = parse(data);

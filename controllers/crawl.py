@@ -18,6 +18,7 @@ def main():
     password = data['password']
     sessionId = data['sessionId']
     captcha = data['captcha']
+    url = data['url']
     # 拼装成教务在线要求
     j_data = {
         'j_username': number,
@@ -27,9 +28,9 @@ def main():
     }
 
     # 模拟登录
-    url = 'http://jw.cuc.edu.cn/academic/j_acegi_security_check'
-    t = requests.post(url, data = j_data, cookies = {'JSESSIONID':sessionId})
-    openHtml = requests.get('http://jw.cuc.edu.cn/academic/student/studentinfo/studentInfoModifyIndex.do?frombase=0&wantTag=0&groupId=&moduleId=2060', cookies = {'JSESSIONID':sessionId})
+    loginUrl = 'http://jw.cuc.edu.cn/academic/j_acegi_security_check'
+    t = requests.post(loginUrl, data = j_data, cookies = {'JSESSIONID':sessionId})
+    openHtml = requests.get(url, cookies = {'JSESSIONID':sessionId})
     print openHtml.text.encode('utf-8')
 
 #start process
