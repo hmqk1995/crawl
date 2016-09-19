@@ -28,8 +28,9 @@ def main():
 
     # 模拟登录
     url = 'http://jw.cuc.edu.cn/academic/j_acegi_security_check'
-    t = requests.post(url, j_data, sessionId)
-    print t.text.encode('utf-8')
+    t = requests.post(url, data = j_data, cookies = {'JSESSIONID':sessionId})
+    openHtml = requests.get('http://jw.cuc.edu.cn/academic/student/studentinfo/studentInfoModifyIndex.do?frombase=0&wantTag=0&groupId=&moduleId=2060', cookies = {'JSESSIONID':sessionId})
+    print openHtml.text.encode('utf-8')
 
 #start process
 if __name__ == '__main__':

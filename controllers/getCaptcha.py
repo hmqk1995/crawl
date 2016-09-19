@@ -27,17 +27,6 @@ class Spider:
         f = open(IMAGE_FILE_PATH, 'wb')
         f.write(m.content)
         f.close()
-    # 模拟登录
-    def login(self):
-        captchaCheck = self.getCaptcha()
-        captcha = raw_input('请输入验证码')
-        self.data['j_captcha'] = captcha
-        # print self.data['j_captcha']
-        self.s.post(self.url, data = self.data, cookies = self.s.cookies)
-        openHtml = self.s.get('http://jw.cuc.edu.cn/academic/student/studentinfo/studentInfoModifyIndex.do?frombase=0&wantTag=0&groupId=&moduleId=2060')
-    # 输出信息
-        soup = BeautifulSoup(openHtml.text, 'html.parser')
-        print soup.get_text()
 
 spider = Spider()
 spider.getCaptcha()
