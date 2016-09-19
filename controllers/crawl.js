@@ -1,4 +1,4 @@
-module.exports = function(json) {
+module.exports = function(json, callback) {
   // 使用python进行爬虫
   var spawn = require('child_process').spawn;
   var python_process = spawn('python', ['./controllers/crawl.py']);
@@ -13,7 +13,8 @@ module.exports = function(json) {
     output += chunk.toString();
   });
   python_process.stdout.on('close', function(data){
-    console.log(output);
+    // console.log(output);
+    callback(output);
   });
   python_process.stdin.write(JSON.stringify(data));
   python_process.stdin.end();

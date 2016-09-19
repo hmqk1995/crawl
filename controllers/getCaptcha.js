@@ -11,6 +11,11 @@ module.exports = function(callback){
     output = output.slice(0, 36);
   });
   python_process.on('close', function() {
-    callback(output);
+    if (callback !== undefined) {
+      callback(output);
+    }
+    else {
+      return output;
+    }
   });
 };

@@ -14,5 +14,18 @@
     <input type="hidden" name="sessionId" id="sessionId" value="<%= sessionId %>" />
     <button type="submit">提交</button>
   </form>
+  <div id="information">
+    <% if (info) { %>
+      <% if(info.name) { %>
+        <div id="name">姓名： <%= info.name %></div>
+      <% } %>
+      <% if(info.major) { %>
+        <div id="name">专业： <%= info.major %></div>
+      <% } %>
+      <% if(info.grade) { %>
+        <div id="name">年级： <%= info.grade %></div>
+      <% } %>
+    <% } %>
+  </div>
 </body>
 </html>

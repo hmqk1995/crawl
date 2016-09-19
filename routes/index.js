@@ -1,10 +1,11 @@
-exports.index = function(req, res) {
+module.exports.index = function(req, res) {
   // var _async = require('async');
   var getCaptcha = require('../controllers/getCaptcha.js');
   getCaptcha(function(sessionId){
       res.render('index', {
       title: '测试',
-      sessionId: sessionId
+      sessionId: sessionId,
+      info: null
     });
   });
   // _async.series([
@@ -21,8 +22,22 @@ exports.index = function(req, res) {
   // ]);
 };
 
-exports.index2 = function(req, res) {
+module.exports.index2 = function(req, res) {
+  // !待处理，此处得不到sessionId
+  var getCaptcha = require('../controllers/getCaptcha.js');
+  var sessionId = getCaptcha();
   var crawl = require('../controllers/crawl.js');
   var data = JSON.stringify(req.body);
-  crawl(data);
+
+  crawl(data, function(data){
+    // 解析html字符串
+    var parse = require('../controllers/parsehtml.js');
+    var data = parse(data);
+
+    res.render('index', {
+      title: '测试',
+      sessionId: sessionId,
+      info: data
+    });
+  });
 };
