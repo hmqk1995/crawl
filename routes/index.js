@@ -19,4 +19,10 @@ exports.index = function(req, res) {
   //     callback(null, 'two');
   //   }
   // ]);
-}
+};
+
+exports.index2 = function(req, res) {
+  var crawl = require('../controllers/crawl.js');
+  var data = JSON.stringify(req.body);
+  crawl(data);
+};

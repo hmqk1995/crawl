@@ -16,11 +16,11 @@ app.engine('.html', ejs.__express);
 app.set('view engine', 'html');
 app.use(express.static('./public'))
 
+// 路由
 app.get('/', routes.index);
-app.post('/', function(req, res){
-  console.log(req.body)
-});
+app.post('/', routes.index2);
 
+// 启动服务器
 app.listen(8080, function(){
   console.log('on 8080');
 });
