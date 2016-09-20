@@ -3,6 +3,8 @@
 import sys, json
 import requests
 from bs4 import BeautifulSoup
+reload(sys)
+sys.setdefaultencoding('utf8')
 
 #Read data from stdin
 def read_in():
@@ -30,7 +32,7 @@ def main():
     # 模拟登录
     loginUrl = 'http://jw.cuc.edu.cn/academic/j_acegi_security_check'
     t = requests.post(loginUrl, data = j_data, cookies = {'JSESSIONID':sessionId})
-    openHtml = requests.get(url, cookies = {'JSESSIONID':sessionId})
+    openHtml = requests.post(url, data = {u'para': '0'}, cookies = {'JSESSIONID':sessionId})
     print openHtml.text.encode('utf-8')
 
 #start process

@@ -1,5 +1,6 @@
+var cheerio = require('cheerio');
+
 module.exports = function(html) {
-  var cheerio = require('cheerio');
   var $ = cheerio.load(html);
 
   var name = $('input[name=realname]').val(),
@@ -11,4 +12,11 @@ module.exports = function(html) {
         major: major,
         grade: grade
       };
+};
+
+module.exports.score = function(html) {
+  var $ = cheerio.load(html);
+
+  var table = $('table.datalist').html();
+  return table;
 };

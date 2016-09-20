@@ -30,11 +30,11 @@ module.exports.index2 = function(req, res) {
   var data = JSON.stringify(req.body);
 
   // 要爬取的url
-  var url = 'http://jw.cuc.edu.cn/academic/student/studentinfo/studentInfoModifyIndex.do?frombase=0&wantTag=0&groupId=&moduleId=2060';
+  var url = 'http://jw.cuc.edu.cn/academic/manager/score/studentOwnScore.do?groupId=&moduleId=2020';
   crawl(data, url, function(data){
     // 解析html字符串
     var parse = require('../controllers/parsehtml.js');
-    var data = parse(data);
+    var data = parse.score(data);
 
     res.render('index', {
       title: '测试',

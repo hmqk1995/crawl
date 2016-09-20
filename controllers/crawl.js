@@ -15,7 +15,7 @@ module.exports = function(json, url, callback) {
     output += chunk.toString();
   });
   python_process.stdout.on('close', function(data){
-    // console.log(output);
+    console.log(output);
     callback(output);
   });
   python_process.stdin.write(JSON.stringify(data));
